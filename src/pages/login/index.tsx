@@ -2,6 +2,7 @@ import { Link } from "react-router"
 import { Input } from "../../components/input"
 import { useState, type FormEvent } from "react"
 
+import {auth} from'../../services/firebaseconction'
 
 export function Login(){
     const [email, setEmail] = useState('');
