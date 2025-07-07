@@ -21,7 +21,7 @@ const router = createBrowserRouter([
     element: <Login/>
   },
   {
-    path: '/social',
+    path: '/adm/social',
     element: <Private><Network/></Private>
   },
 ])
