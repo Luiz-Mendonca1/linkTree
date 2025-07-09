@@ -1,4 +1,4 @@
-import { useState} from 'react'
+import { useEffect, useState} from 'react'
 import type { FormEvent } from 'react';
 import { Header } from '../../components/header/header';
 import { Input } from "../../components/input";
@@ -16,6 +16,22 @@ export function Network(){
   const [instagram, setInstagram] = useState("")
   const [youtube, setYoutube] = useState("")
 
+    useEffect(()=>{
+        function loadLinks(){
+            const docRef = doc(db, 'social', 'link')
+            getDoc(docRef)
+            .then((snapshot)=>{
+                
+                if(snapshot.data() !== undefined){
+                    setFacebook(snapshot.data()?.facebook)
+                    setInstagram(snapshot.data()?.instagram)
+                    setYoutube(snapshot.data()?.youtube)
+                }
+            })
+        }
+        loadLinks()
+    }, [])
+
   function handleRegister(e: FormEvent){
     e.preventDefault();
 
@@ -25,10 +41,10 @@ export function Network(){
       youtube: youtube
     })
     .then(()=> {
-      console.log("CADASTRADOS COM SUCESSO!")
+      console.log("SUCCESSFULLY REGISTERED")
     })
     .catch((error) => {
-      console.log("ERRO AO SALVAR" + error)
+      console.log("ERROR SAVING" + error)
     })
 
   }
