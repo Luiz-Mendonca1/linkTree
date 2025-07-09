@@ -4,7 +4,7 @@ import { useEffect, useState, type FormEvent } from "react"
 import { FiTrash } from "react-icons/fi"
 import { db } from "../../services/firebaseconction"
 import { addDoc, collection, onSnapshot, query, orderBy, doc, deleteDoc } from "firebase/firestore"
-import { queryRef } from "firebase/data-connect"
+
 
 interface LinkProps{
     id: string,
