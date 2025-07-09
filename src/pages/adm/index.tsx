@@ -70,6 +70,13 @@ export function Adm(){
         console.log('error '+ error)
     })
     }
+
+    async function handleDeleteLink(id: string){
+        const docRef = doc(db, 'links', id)
+        await deleteDoc(docRef)
+    }
+
+
     return(
         <div className="flex items-center flex-col min-h-screen pb-7 px-2">
             <Header/>
@@ -128,15 +135,20 @@ export function Adm(){
             <h2 className="font-bold text-white mb-4 text-2xl">
                 My links</h2>
 
-            <article className="flex items-center justify-between w-11/12 max-w-xl rounded py-3 px-2 mb-2 select-none"
-            style={{backgroundColor: '#2563EB', color: '#000'}}>
-                <p>Youtube chanel</p>
+                {links.map((link)=>(
+            <article
+            key={link.id} 
+            className="flex items-center justify-between w-11/12 max-w-xl rounded py-3 px-2 mb-2 select-none"
+            style={{backgroundColor: link.bg, color: link.color}}>
+                <p>{link.name}</p>
                 <div>
-                    <button className="cursor-pointer border border-dashed p-1 rounded">
+                    <button className="cursor-pointer border border-dashed p-1 rounded"
+                    onClick={()=>handleDeleteLink(link.id)}>
                         <FiTrash size={20 } color="#FFF"/>
                     </button>
                 </div>
             </article>
+            ))}
         </div>
     )
 }
